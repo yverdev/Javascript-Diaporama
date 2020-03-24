@@ -1,4 +1,4 @@
-        var slides =[
+var slides =[
     { image: 'images/1.jpg', legend: 'Street Art'          },
     { image: 'images/2.jpg', legend: 'Fast Lane'           },
     { image: 'images/3.jpg', legend: 'Colorful Building'   },
@@ -6,7 +6,7 @@
     { image: 'images/5.jpg', legend: 'City by night'       },
     { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
 ];
-
+var timer = -1;
 var index = 0;
 var nextBtn = document.querySelector('button#slider-next');
 var imageElt = document.querySelector('figure img');
@@ -37,18 +37,25 @@ function lastImage(){
     titleElt.textContent =  slides[index].legend;
 }
 
-function randomSelect(){
-    index = slides[Math.floor(random(0,slides.lenght -1))];
+function display(){
+      
+    imageElt.src = slides[index].image;
+    titleElt.textContent =  slides[index].legend;
+    
 }
 
 function playPause(){
-    var id = setInterval(nextImage, 1000);
-   
+   if(timer == -1){
+       timer = setInterval(nextImage, 1000); 
+   } else{
+       clearInterval(timer);
+       timer = -1;
+    } 
 }
 
 nextBtn.addEventListener('click', nextImage)
 backBtn.addEventListener('click', lastImage)
-randomBtn.addEventListener('click', randomSelect)
+randomBtn.addEventListener('click', display)
 playBtn.addEventListener('click',playPause)
 /*
 Excecute fonction après un délais déterminé: setTimeout(function,delay)

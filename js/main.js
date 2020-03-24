@@ -7,6 +7,7 @@ var slides =[
     { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
 ];
 
+var startAlert = alert("Vous pouvez utiliser:\nla souris\nou\nle clavier avec les touches:\n-> : image suivante\n<- : image précédente\nP : play\nR : image aléatoire")
 // Selection d'élément:
 var timer = -1; // Variable utilisé pour play pause
 var index = 0; // Variable utilisé pour next image - last image
@@ -80,17 +81,21 @@ function display(){
 //Fonction keyboard
 function onKeyup(event){
     console.log(event.code);
-    if(event.code == 'ArrowRight'){
-        nextImage();
-    }else if(event.code == 'ArrowLeft'){
-        lastImage();
-    }else if(event.code == 'KeyR'){
-        display();
-    }else if(event.code == 'KeyP'){
-        playPause();
-    }else{
-        alert('Veuillez utiliser les touches suivantes: .n->, <-, Touche R, Touche P')
-    }
+    switch(event.code){
+        case'ArrowRight':
+            nextImage();
+            break;
+        case 'ArrowLeft':
+            lastImage();
+            break;
+        case 'KeyR':
+            display();
+            break;
+        case 'KeyP':
+            playPause();
+            break;
+        default:
+            alert('Veuillez utiliser les touches suivantes: ->, <-, Touche R, Touche P')
 }
 
 

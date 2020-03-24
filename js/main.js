@@ -6,6 +6,8 @@ var slides =[
     { image: 'images/5.jpg', legend: 'City by night'       },
     { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
 ];
+
+// Selection d'élément:
 var timer = -1; // Variable utilisé pour play pause
 var index = 0; // Variable utilisé pour next image - last image
 var nextBtn = document.querySelector('button#slider-next'); 
@@ -15,11 +17,12 @@ var backBtn = document.querySelector('button#slider-previous');
 var randomBtn = document.querySelector('button#slider-random'); 
 var playBtn = document.querySelector('button#slider-toogle');
 var icon = document.querySelector('button#slider-toogle i');
-var colorIcon = document.querySelector('button.btn-success')
-console.log(icon);
-console.log('nextBtn')
-console.log('imageElt')
-console.log('titleElt')
+var colorIcon = document.querySelector('button.btn-success');
+console.log('icon');
+console.log('colorIcon');
+console.log('nextBtn');
+console.log('imageElt');
+console.log('titleElt');
 
 // Fonction Next Image
 function nextImage (){
@@ -64,21 +67,56 @@ function playPause(){
 
 // Fonction Display
 function display(){
-    index = getRandomInt(0, slides.length -1);
+    var randomIndex = getRandomInt(0, slides.length -1);
+    while(randomIndex == index){
+        randomIndex = getRandomInt(0, slides.length -1);
+    }
+    index = randomIndex;
     imageElt.src = slides[index].image;
     titleElt.textContent =  slides[index].legend;
-    
 }
 // End Fonction Display
+
+//Fonction keyboard
+function onKeyup(event){
+    console.log(event.code);
+    if(event.code == 'ArrowRight'){
+        nextImage();
+    }else if(event.code == 'ArrowLeft'){
+        lastImage();
+    }else if(event.code == 'KeyR'){
+        display();
+    }else if(event.code == 'KeyP'){
+        playPause();
+    }else{
+        alert('Veuillez utiliser les touches suivantes: .n->, <-, Touche R, Touche P')
+    }
+}
+
+
 
 // Ecouteurs d'évenement:
 nextBtn.addEventListener('click', nextImage)
 backBtn.addEventListener('click', lastImage)
 randomBtn.addEventListener('click', display)
 playBtn.addEventListener('click',playPause)
+document.addEventListener('keyup', onKeyup)
 
 
 
+
+
+/* 
+Evenements:
+Keydown: event qui se declenche quand touche est enfoncée
+Keyup: event qui se declenche quand une touche est relachée
+
+
+Fleche de gauche: executer previousImage()
+Fleche de droite: excecuter nextImage()
+Touche p: excecuter palypause()
+Touche r: excecuter random()
+*/
 
 /*
 Excecute fonction après un délais déterminé: setTimeout(function,delay)

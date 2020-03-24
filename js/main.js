@@ -6,19 +6,22 @@ var slides =[
     { image: 'images/5.jpg', legend: 'City by night'       },
     { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
 ];
-var timer = -1;
-var index = 0;
-var nextBtn = document.querySelector('button#slider-next');
-var imageElt = document.querySelector('figure img');
-var titleElt = document.querySelector('figure.slider figcaption');
-var backBtn = document.querySelector('button#slider-previous');
-var randomBtn = document.querySelector('button#slider-random');
+var timer = -1; // Variable utilisé pour play pause
+var index = 0; // Variable utilisé pour next image - last image
+var nextBtn = document.querySelector('button#slider-next'); 
+var imageElt = document.querySelector('figure img'); 
+var titleElt = document.querySelector('figure.slider figcaption'); 
+var backBtn = document.querySelector('button#slider-previous'); 
+var randomBtn = document.querySelector('button#slider-random'); 
 var playBtn = document.querySelector('button#slider-toogle');
+var icon = document.querySelector('button#slider-toogle i');
+var colorIcon = document.querySelector('button.btn-success')
+console.log(icon);
 console.log('nextBtn')
 console.log('imageElt')
 console.log('titleElt')
 
-
+// Fonction Next Image
 function nextImage (){
     index ++; 
     if(index > slides.length -1){
@@ -27,7 +30,9 @@ function nextImage (){
     imageElt.src = slides[index].image;
     titleElt.textContent =  slides[index].legend;
     }
+// End Fonction Next Image
 
+// Fonction Last Image
 function lastImage(){
     index --;
     if(index < 0){
@@ -36,27 +41,45 @@ function lastImage(){
     imageElt.src = slides[index].image;
     titleElt.textContent =  slides[index].legend;
 }
+// End Fonction Last Image
 
+// Fonction Play Pause
+function playPause(){
+    if(timer == -1){
+        timer = setInterval(nextImage, 1000);
+        icon.classList.remove('fa-play');
+        icon.classList.add('fa-pause'); 
+        colorIcon.classList.remove('btn-success');
+        colorIcon.classList.add('btn-danger');
+    } else {
+        clearInterval(timer);
+        timer = -1;
+        icon.classList.remove('fa-pause');
+        icon.classList.add('fa-play');
+        colorIcon.classList.remove('btn-danger');
+        colorIcon.classList.add('btn-success');
+     } 
+ }
+ // End Fonction Play Pause
+
+// Fonction Display
 function display(){
-      
+    index = getRandomInt(0, slides.length -1);
     imageElt.src = slides[index].image;
     titleElt.textContent =  slides[index].legend;
     
 }
+// End Fonction Display
 
-function playPause(){
-   if(timer == -1){
-       timer = setInterval(nextImage, 1000); 
-   } else{
-       clearInterval(timer);
-       timer = -1;
-    } 
-}
-
+// Ecouteurs d'évenement:
 nextBtn.addEventListener('click', nextImage)
 backBtn.addEventListener('click', lastImage)
 randomBtn.addEventListener('click', display)
 playBtn.addEventListener('click',playPause)
+
+
+
+
 /*
 Excecute fonction après un délais déterminé: setTimeout(function,delay)
 function sayHello(){

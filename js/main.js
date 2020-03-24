@@ -7,7 +7,7 @@ var slides =[
     { image: 'images/6.jpg', legend: 'Tour Eiffel la nuit' }
 ];
 
-var startAlert = alert("Vous pouvez utiliser:\nla souris\nou\nle clavier avec les touches:\n-> : image suivante\n<- : image précédente\nP : play\nR : image aléatoire")
+
 // Selection d'élément:
 var timer = -1; // Variable utilisé pour play pause
 var index = 0; // Variable utilisé pour next image - last image

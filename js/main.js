@@ -96,8 +96,8 @@ function onKeyup(event){
             break;
         default:
             alert('Veuillez utiliser les touches suivantes: ->, <-, Touche R, Touche P')
+    }
 }
-
 
 
 // Ecouteurs d'évenement:
